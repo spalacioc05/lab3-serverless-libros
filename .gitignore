@@ -1,0 +1,31 @@
+# Dependencias
+node_modules/
+
+# Serverless Framework
+.serverless/
+.serverless_plugins/
+
+# Variables de entorno y credenciales
+.env
+.env.*
+.aws/
+credentials
+*.pem
+*.key
+
+# Logs
+*.log
+npm-debug.log*
+
+# Sistema operativo / editores
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Archivos temporales
+*.tmp
+*.zip
+
+# Documento de la guía del laboratorio (material del docente, no se publica)
+LABORATORIO 3.pdf

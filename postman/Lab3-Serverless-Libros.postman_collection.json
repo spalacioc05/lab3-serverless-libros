@@ -1,0 +1,221 @@
+{
+  "info": {
+    "name": "Lab3 Serverless Libros",
+    "description": "Colección Postman para el Laboratorio 3 de Cloud Computing (UDEA). API REST serverless de libros sobre AWS Lambda, API Gateway HTTP API y DynamoDB.\n\nPara producción: reemplazar la variable de colección 'baseUrl' por la URL que entrega 'serverless deploy' (ej: https://abcd1234.execute-api.us-east-1.amazonaws.com).\n\nPara local: usar el entorno u override de 'baseUrl' = http://localhost:3000 y ejecutar 'serverless offline'.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://REEMPLAZAR-CON-URL-DE-API-GATEWAY.execute-api.us-east-1.amazonaws.com",
+      "type": "string"
+    },
+    {
+      "key": "libroId",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Producción (AWS)",
+      "item": [
+        {
+          "name": "Crear libro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('libroId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Cien años de soledad\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"genero\": \"Realismo mágico\",\n  \"paginas\": 471,\n  \"disponible\": true\n}"
+            },
+            "url": "{{baseUrl}}/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener libro por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar libro",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"Cien años de soledad (edición conmemorativa)\",\n  \"autor\": \"Gabriel García Márquez\",\n  \"genero\": \"Realismo mágico\",\n  \"paginas\": 496,\n  \"disponible\": false\n}"
+            },
+            "url": "{{baseUrl}}/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar libro",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear libro - body inválido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"\",\n  \"paginas\": -5\n}"
+            },
+            "url": "{{baseUrl}}/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener libro - id inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/libros/00000000-0000-0000-0000-000000000000"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Local (serverless-offline)",
+      "item": [
+        {
+          "name": "Crear libro",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201) {",
+                  "    const json = pm.response.json();",
+                  "    pm.collectionVariables.set('libroId', json.id);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"El principito\",\n  \"autor\": \"Antoine de Saint-Exupéry\",\n  \"genero\": \"Fábula\",\n  \"paginas\": 96,\n  \"disponible\": true\n}"
+            },
+            "url": "http://localhost:3000/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Listar libros",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener libro por id",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Actualizar libro",
+          "request": {
+            "method": "PUT",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"El principito (ilustrado)\",\n  \"autor\": \"Antoine de Saint-Exupéry\",\n  \"genero\": \"Fábula\",\n  \"paginas\": 120,\n  \"disponible\": false\n}"
+            },
+            "url": "http://localhost:3000/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Eliminar libro",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "http://localhost:3000/libros/{{libroId}}"
+          },
+          "response": []
+        },
+        {
+          "name": "Crear libro - body inválido (400)",
+          "request": {
+            "method": "POST",
+            "header": [
+              { "key": "Content-Type", "value": "application/json" }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"titulo\": \"\",\n  \"paginas\": -5\n}"
+            },
+            "url": "http://localhost:3000/libros"
+          },
+          "response": []
+        },
+        {
+          "name": "Obtener libro - id inexistente (404)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "http://localhost:3000/libros/00000000-0000-0000-0000-000000000000"
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

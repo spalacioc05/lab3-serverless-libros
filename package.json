@@ -1,0 +1,26 @@
+{
+  "name": "lab3-serverless-libros",
+  "version": "1.0.0",
+  "description": "Laboratorio 3 de Cloud Computing (UDEA) - API REST serverless para gestionar libros usando AWS Lambda, API Gateway HTTP API y DynamoDB.",
+  "main": "handler.js",
+  "private": true,
+  "scripts": {
+    "lint:syntax": "node --check handler.js",
+    "offline": "serverless offline",
+    "package": "serverless package",
+    "deploy": "serverless deploy",
+    "remove": "serverless remove"
+  },
+  "license": "UNLICENSED",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.899.0",
+    "@aws-sdk/lib-dynamodb": "^3.899.0"
+  },
+  "devDependencies": {
+    "serverless-offline": "^14.4.0"
+  },
+  "allowScripts": {
+    "esbuild@0.28.2": true,
+    "serverless@4.43.0": true
+  }
+}
