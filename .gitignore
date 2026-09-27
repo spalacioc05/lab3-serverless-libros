@@ -29,3 +29,6 @@ Thumbs.db
 
 # Documento de la guía del laboratorio (material del docente, no se publica)
 LABORATORIO 3.pdf
+
+# Evidencias locales para el video/documento (no se publican en GitHub)
+evidencias/

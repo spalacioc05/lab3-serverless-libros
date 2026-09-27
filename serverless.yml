@@ -1,6 +1,5 @@
-# Reemplazar por la organización real de la cuenta en app.serverless.com antes de "serverless deploy".
-# org: universidaddeantioquia
-# app: lab3-serverless-libros
+org: spalacioc05
+app: lab3-serverless-libros
 service: lab3-serverless-libros
 
 provider:
